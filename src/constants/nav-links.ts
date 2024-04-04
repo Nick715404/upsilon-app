@@ -7,11 +7,11 @@ export const navLinks = [
   {
     id: 2,
     label: 'Create Product',
-    route: '/createProducts'
+    route: '/createProduct'
   },
   {
     id: 3,
-    label: 'Product',
+    label: 'Products',
     route: '/products'
   },
 ]
