@@ -1,14 +1,17 @@
-import { Container } from "@mui/material"
 import ProductList from "../components/productsList/ProductList"
+import LimiterBtns from "../components/limiter-btns/LimiterBtns"
 
-type Props = {}
+import { Box, Container } from "@mui/material"
 
-export default function ProductsPage({ }: Props) {
+export default function ProductsPage() {
   return (
-    <div>
+    <Box>
       <Container maxWidth='xl'>
+        <Box sx={{ marginTop: '65px', display: 'flex', flexDirection: 'row', gap: '30px' }}>
+          <LimiterBtns />
+        </Box>
         <ProductList />
       </Container>
-    </div>
+    </Box>
   )
 }

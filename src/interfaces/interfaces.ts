@@ -10,3 +10,9 @@ export interface IProduct {
     count?: number
   }
 }
+
+export interface IButtons {
+  id: number
+  title: string
+  value: number | null
+}

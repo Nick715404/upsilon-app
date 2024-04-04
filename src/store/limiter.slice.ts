@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const limiterSlice = createSlice({
   name: 'limit',
   initialState: {
-    limit: 5
+    limit: 8
   },
   reducers: {
     changeLimit(state, action) {

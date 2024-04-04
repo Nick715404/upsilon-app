@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../api/products';
 
 type Props = {
@@ -9,10 +9,12 @@ type Props = {
 export default function InitAppEntities({ children }: Props) {
 
   const dispatch: any = useDispatch();
+  const limiter = useSelector((state: any) => state.limiter.limit);
+  console.log(limiter);
 
   useEffect(() => {
-    dispatch(fetchProducts({ limit: 5 }))
-  }, [dispatch])
+    dispatch(fetchProducts({ limit: limiter }))
+  }, [dispatch, limiter])
 
   return (
     <>
