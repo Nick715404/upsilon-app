@@ -7,8 +7,6 @@ export const limiterSlice = createSlice({
   },
   reducers: {
     changeLimit(state, action) {
-      console.log(state);
-      console.log(action);
       state.limit = action.payload;
     }
   }

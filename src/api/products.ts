@@ -6,7 +6,7 @@ interface FetchProductsParams {
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async ({ limit }: FetchProductsParams) => {
+  async ({ limit }: FetchProductsParams, { rejectWithValue }) => {
     try {
       const url = 'https://fakestoreapi.com/products';
       const reqUrl = `${url}?limit=${limit}`;
@@ -17,12 +17,15 @@ export const fetchProducts = createAsyncThunk(
           'Content-Type': 'application/json'
         }
       });
+
+      if (!res.ok) throw new Error('Server error')
+
       const data = await res.json();
-      console.log(data);
+
       return data;
     }
-    catch (error) {
-      console.log(error);
+    catch (error: any) {
+      return rejectWithValue(error.message)
     }
   }
 );
@@ -36,9 +39,10 @@ export const fetchSingleProducts = async (id: string | undefined) => {
       }
     });
 
+    if (!res.ok) throw new Error('Server error')
+
     const data = await res.json();
-    console.log(data);
-    
+
     return data;
   }
   catch (error) {

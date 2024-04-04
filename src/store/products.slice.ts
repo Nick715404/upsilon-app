@@ -5,8 +5,8 @@ export const productSlice = createSlice({
   name: 'products',
   initialState: {
     products: [],
-    status: 'null',
-    error: ''
+    status: '',
+    error: null as any
   },
   reducers: {
 
@@ -14,15 +14,16 @@ export const productSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state, action) => {
-        state.status = 'loding';
-        state.error = 'null';
+        state.status = 'loading';
+        state.error = '';
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = 'resolved';
         state.products = action.payload;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
-        // Обработка действия "rejected"
+        state.status = 'rejected';
+        state.error = action.payload;
       });
   }
 });

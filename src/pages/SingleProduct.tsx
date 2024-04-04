@@ -1,8 +1,8 @@
-import { CSSProperties, useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
 import { fetchSingleProducts } from "../api/products";
-import { Box, Container, Typography } from "@mui/material";
 import { IProduct } from "../interfaces/interfaces";
+import { useParams } from "react-router-dom"
+import { CSSProperties, useEffect, useState } from "react";
+import { Box, Container, Typography } from "@mui/material";
 
 export default function SingleProduct() {
   const [product, setProduct] = useState<IProduct | null>(null);

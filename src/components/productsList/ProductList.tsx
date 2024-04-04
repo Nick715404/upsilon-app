@@ -2,15 +2,22 @@ import { useSelector } from "react-redux";
 import { IProduct } from "../../interfaces/interfaces";
 import Product from "../product/Product";
 import { Box } from "@mui/material";
+import { useEffect } from "react";
 
 type Props = {}
 
 export default function ProductList({ }: Props) {
 
-  const products: IProduct[] = useSelector((state: any) => state.products.products)
+  const { status, products, error } = useSelector((state: any) => state.products)
+
+  useEffect(() => {
+    console.log(status);
+  }, [status])
 
   return (
     <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '30px', marginTop: '80px' }}>
+      {status === 'loading' && <h1>Loading...</h1>}
+      {error && <h1>An error occured {error}</h1>}
       {products.map((item: IProduct) => (
         <Product key={item.id} data={item} />
       ))}
