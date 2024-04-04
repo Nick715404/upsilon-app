@@ -1,18 +1,19 @@
 import { useSelector } from "react-redux";
+import { IProduct } from "../../interfaces/interfaces";
+import Product from "../product/Product";
+import { Box } from "@mui/material";
 
 type Props = {}
 
 export default function ProductList({ }: Props) {
 
-  const products = useSelector((state: any) => state.products.products)
+  const products: IProduct[] = useSelector((state: any) => state.products.products)
 
   return (
-    <div>
-      {products.map((item: any) => (
-        <div key={item.id} className="">
-          {item.title}
-        </div>
+    <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '30px', marginTop: '80px' }}>
+      {products.map((item: IProduct) => (
+        <Product key={item.id} data={item} />
       ))}
-    </div>
+    </Box>
   )
 }

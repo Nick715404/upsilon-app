@@ -11,7 +11,7 @@ export default function InitAppEntities({ children }: Props) {
   const dispatch: any = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProducts())
+    dispatch(fetchProducts({ limit: 5 }))
   }, [dispatch])
 
   return (

@@ -1,10 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+interface FetchProductsParams {
+  limit: number;
+}
+
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async () => {
+  async ({ limit }: FetchProductsParams) => {
     try {
-      const res = await fetch('https://fakestoreapi.com/products', {
+      const res = await fetch(`https://fakestoreapi.com/products?limit=${limit}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'

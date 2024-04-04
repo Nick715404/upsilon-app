@@ -1,3 +1,4 @@
+import { Container } from "@mui/material"
 import ProductList from "../components/productsList/ProductList"
 
 type Props = {}
@@ -5,7 +6,9 @@ type Props = {}
 export default function ProductsPage({ }: Props) {
   return (
     <div>
-      <ProductList />
+      <Container maxWidth='xl'>
+        <ProductList />
+      </Container>
     </div>
   )
 }
