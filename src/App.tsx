@@ -12,20 +12,18 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
   return (
-    <>
-      <InitAppEntities>
-        <Header />
-        <BrowserRouter>
-          <Routes>
-            <Route path='*' element={<NotFoundPage />} />
-            <Route path='/' element={<HomePage />} />
-            <Route path='/createProduct' element={<CreateProductPage />} />
-            <Route path='/products' element={<ProductsPage />} />
-            <Route path='/product/:id' element={<SingleProduct />} />
-          </Routes>
-        </BrowserRouter>
-      </InitAppEntities>
-    </>
+    <InitAppEntities>
+      <Header />
+      <BrowserRouter>
+        <Routes>
+          <Route path='*' element={<NotFoundPage />} />
+          <Route path='/' element={<HomePage />} />
+          <Route path='/createProduct' element={<CreateProductPage />} />
+          <Route path='/products' element={<ProductsPage />} />
+          <Route path='/product/:id' element={<SingleProduct />} />
+        </Routes>
+      </BrowserRouter>
+    </InitAppEntities>
   )
 }
 

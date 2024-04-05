@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../api/products';
+import { fetchProductFromLocStore, fetchProducts } from '../api/products';
 
 type Props = {
   children: React.ReactNode
@@ -14,6 +14,10 @@ export default function InitAppEntities({ children }: Props) {
   useEffect(() => {
     dispatch(fetchProducts({ limit: limiter }))
   }, [dispatch, limiter])
+
+  useEffect(() => {
+    dispatch(fetchProductFromLocStore());
+  }, [dispatch])
 
   return (
     <>

@@ -1,13 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
 import productsReducer from './products.slice';
 import limiterReducer from './limiter.slice';
-import createdProductsReducer from './createdProducts.slice'
+import publishedReducer from './published.slice';
+
+import { configureStore } from "@reduxjs/toolkit";
 
 const store = configureStore({
   reducer: {
     products: productsReducer,
     limiter: limiterReducer,
-    createdProducts: createdProductsReducer
+    switcher: publishedReducer,
   }
 });
 

@@ -1,30 +1,33 @@
-import { Button, Card, CardContent, CardMedia, Typography } from "@mui/material"
+import { Box, Button, Card, CardContent, CardMedia, Typography } from "@mui/material"
 import { IProduct } from "../../interfaces/interfaces"
-import { productCardStyles } from "../../styles/product.styles"
+import { deleteModalStyle, productCardStyles } from "../../styles/product.styles"
 import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../api/products";
-import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { useState } from "react";
 
 type Props = {
   data: IProduct
+  link: string | number
 }
 
-export default function Product({ data }: Props) {
+export default function Product({ data, link }: Props) {
+
+  const [open, setOpen] = useState<boolean>(false);
 
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
-  const { id } = data
-
   const handleDelete = () => {
+    const { id } = data;
     dispatch(deleteProduct({ id }));
-    console.log(id);
+    setOpen(false);
   }
 
   return (
     <>
-      <Link to={`/product/${data.id}`} style={{ textDecoration: 'none' }}>
-        <Card sx={productCardStyles}>
+      <Card sx={productCardStyles}>
+        <Link to={`/product/${link}`} style={{ textDecoration: 'none' }}>
           <CardMedia
             component="img"
             height='340'
@@ -39,11 +42,22 @@ export default function Product({ data }: Props) {
               {data.price}$
             </Typography>
           </CardContent>
-        </Card>
-      </Link>
-      <Button onClick={handleDelete} variant="contained">
-        Удалить
-      </Button>
+        </Link>
+        <Button sx={{ marginLeft: '20px' }} onClick={() => setOpen(true)} variant="contained">
+          Удалить
+        </Button >
+        <Button sx={{ marginLeft: '20px' }} href="/createProduct" variant="contained">
+          Редактировать
+        </Button >
+      </Card >
+      {open && <Box sx={deleteModalStyle}>
+        <Typography sx={{ marginBottom: '10px' }}>
+          ВЫ точно уверены что хотите удалить продукт с названием {data.title}?
+        </Typography>
+        <Button onClick={handleDelete} sx={{ marginBottom: '10px' }} variant="contained">Да</Button>
+        <Button onClick={() => setOpen(false)}>Отмена</Button>
+      </Box>
+      }
     </>
   )
 }

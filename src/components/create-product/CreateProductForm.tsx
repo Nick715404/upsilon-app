@@ -1,3 +1,8 @@
+import { createProduct } from '../../api/products';
+import { ICreatedProduct } from '../../interfaces/interfaces';
+import { saveToLocalStorage } from '../../utils/saveToLocStore';
+
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import {
   TextField,
@@ -7,9 +12,6 @@ import {
   Box,
   Typography
 } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { createProduct } from '../../api/products';
-import { ICreatedProduct } from '../../interfaces/interfaces';
 
 interface createProduct {
   product: ICreatedProduct
@@ -35,7 +37,8 @@ export default function CreateProductForm() {
     data.created_at = new Date().toISOString();
     data.price = parseInt(data.price);
     const product: ICreatedProduct = data;
-    dispatch(createProduct({ product }))
+    dispatch(createProduct({ product }));
+    saveToLocalStorage(data);
     reset();
   };
 

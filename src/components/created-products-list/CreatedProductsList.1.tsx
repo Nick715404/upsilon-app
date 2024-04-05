@@ -1,13 +1,14 @@
-import { Box } from "@mui/material";
-import { useSelector } from "react-redux";
-import { IProduct } from "../../interfaces/interfaces";
 import Product from "../product/Product";
-import { useEffect } from "react";
+
+import { ICreatedProduct } from "../../interfaces/interfaces";
+
+import { useSelector } from "react-redux";
+import { Box } from "@mui/material";
 
 
 export default function CreatedProductsList() {
 
-  const { products, status, error } = useSelector((state: any) => state.createdProducts);
+  const { sortedProducts, status, error } = useSelector((state: any) => state.products);
 
   const boxStyles = {
     display: 'grid',
@@ -17,16 +18,14 @@ export default function CreatedProductsList() {
     marginBottom: '80px'
   }
 
-  useEffect(() => {
-    console.log(products);
-  }, [status]);
+  console.log(sortedProducts);
 
   return (
     <Box sx={boxStyles}>
       {status === 'loading' && <h1>Loading...</h1>}
       {error && <h1>An error occured {error}</h1>}
-      {products.map((item: IProduct) => (
-        <Product key={item.id} data={item} />
+      {sortedProducts.map((item: ICreatedProduct, index: number) => (
+        <Product link={item.created_at} key={index} data={item} />
       ))}
     </Box>
   );

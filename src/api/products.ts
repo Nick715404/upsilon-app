@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ICreatedProduct } from "../interfaces/interfaces";
-import { removeProduct } from "../store/products.slice";
+import { addProduct, removeProduct } from "../store/products.slice";
 
 interface FetchProductsParams {
   limit: number | null;
@@ -60,7 +60,6 @@ export const createProduct = createAsyncThunk(
   'products/createProduct',
   async ({ product }: createProduct, { rejectWithValue, dispatch }) => {
     try {
-
       console.log(product);
 
       const res = await fetch('https://fakestoreapi.com/products', {
@@ -83,6 +82,7 @@ export const createProduct = createAsyncThunk(
 
       const data = await res.json();
       console.log(data);
+      dispatch(addProduct({ ...data }))
       return data;
     }
     catch (error: any) {
@@ -113,3 +113,21 @@ export const deleteProduct = createAsyncThunk(
     }
   }
 )
+
+export const fetchProductFromLocStore = createAsyncThunk(
+  'products/fetchFromLocStore',
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      const storedProducts = localStorage.getItem('products');
+      if (!storedProducts) {
+        throw new Error('No products found in local storage');
+      }
+      const products = JSON.parse(storedProducts);
+
+      dispatch(addProduct(products))
+
+    } catch (error: any) {
+      return rejectWithValue(error.message)
+    }
+  }
+);

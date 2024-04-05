@@ -10,10 +10,6 @@ export default function ProductList({ }: Props) {
 
   const { status, products, error } = useSelector((state: any) => state.products)
 
-  useEffect(() => {
-    console.log(status);
-  }, [status])
-
   const boxStyles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)',
@@ -26,8 +22,8 @@ export default function ProductList({ }: Props) {
     <Box sx={boxStyles}>
       {status === 'loading' && <h1>Loading...</h1>}
       {error && <h1>An error occured {error}</h1>}
-      {products.map((item: IProduct) => (
-        <Product key={item.id} data={item} />
+      {products.map((item: IProduct, index: number) => (
+        <Product link={item.id} key={index} data={item} />
       ))}
     </Box>
   )

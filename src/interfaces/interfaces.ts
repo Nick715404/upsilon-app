@@ -18,12 +18,13 @@ export interface IButtons {
 }
 
 export interface ICreatedProduct {
-  id?: number
+  id: number
   title: string
   price: number
   description: string
   published: boolean
-  created_at?: string
+  created_at: string
   category?: string
-  image?: string
+  image: string
+
 }
