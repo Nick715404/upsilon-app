@@ -1,14 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchProducts } from "../api/products";
+import { deleteProduct, fetchProducts } from "../api/products";
+import { ICreatedProduct, IProduct } from "../interfaces/interfaces";
+
 
 export const productSlice = createSlice({
   name: 'products',
   initialState: {
     products: [],
+    createdProducts: [],
     status: '',
     error: null as any
   },
-  reducers: {},
+  reducers: {
+    removeProduct(state, action) {
+      state.products = state.products.filter((product: IProduct) => product.id !== action.payload.id);
+      state.createdProducts = state.createdProducts.filter((product: ICreatedProduct) => product.id !== action.payload.id);
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state, _) => {
@@ -22,8 +30,10 @@ export const productSlice = createSlice({
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'rejected';
         state.error = action.payload;
-      });
+      })
   }
 });
+
+export const { removeProduct } = productSlice.actions;
 
 export default productSlice.reducer;

@@ -7,8 +7,17 @@ import {
   Box,
   Typography
 } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { createProduct } from '../../api/products';
+import { ICreatedProduct } from '../../interfaces/interfaces';
+
+interface createProduct {
+  product: ICreatedProduct
+}
 
 export default function CreateProductForm() {
+
+  const dispatch: any = useDispatch();
 
   const {
     register,
@@ -24,7 +33,9 @@ export default function CreateProductForm() {
 
   const onSubmit = (data: any) => {
     data.created_at = new Date().toISOString();
-    console.log(JSON.stringify(data));
+    data.price = parseInt(data.price);
+    const product: ICreatedProduct = data;
+    dispatch(createProduct({ product }))
     reset();
   };
 
@@ -34,7 +45,7 @@ export default function CreateProductForm() {
         <TextField
           label="Название"
           variant="outlined"
-          {...register('name', {
+          {...register('title', {
             required: "Поле обязательно к заполнению",
             minLength: {
               value: 5,
@@ -42,7 +53,7 @@ export default function CreateProductForm() {
             }
           })}
         />
-        {errors?.name && <Typography sx={{ color: 'red' }}>{`${errors?.name?.message}` || "Error"}</Typography>}
+        {errors?.title && <Typography sx={{ color: 'red' }}>{`${errors?.title?.message}` || "Error"}</Typography>}
         <TextField
           label="Цена"
           variant="outlined"

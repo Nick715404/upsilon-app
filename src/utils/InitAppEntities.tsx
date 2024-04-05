@@ -10,7 +10,6 @@ export default function InitAppEntities({ children }: Props) {
 
   const dispatch: any = useDispatch();
   const limiter = useSelector((state: any) => state.limiter.limit);
-  console.log(limiter);
 
   useEffect(() => {
     dispatch(fetchProducts({ limit: limiter }))

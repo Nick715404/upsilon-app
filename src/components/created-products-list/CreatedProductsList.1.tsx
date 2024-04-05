@@ -1,18 +1,13 @@
+import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { IProduct } from "../../interfaces/interfaces";
 import Product from "../product/Product";
-import { Box } from "@mui/material";
 import { useEffect } from "react";
 
-type Props = {}
 
-export default function ProductList({ }: Props) {
+export default function CreatedProductsList() {
 
-  const { status, products, error } = useSelector((state: any) => state.products)
-
-  useEffect(() => {
-    console.log(status);
-  }, [status])
+  const { products, status, error } = useSelector((state: any) => state.createdProducts);
 
   const boxStyles = {
     display: 'grid',
@@ -22,6 +17,10 @@ export default function ProductList({ }: Props) {
     marginBottom: '80px'
   }
 
+  useEffect(() => {
+    console.log(products);
+  }, [status]);
+
   return (
     <Box sx={boxStyles}>
       {status === 'loading' && <h1>Loading...</h1>}
@@ -30,5 +29,5 @@ export default function ProductList({ }: Props) {
         <Product key={item.id} data={item} />
       ))}
     </Box>
-  )
+  );
 }
