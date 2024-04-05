@@ -1,15 +1,14 @@
+import { navLinks } from '../../constants/nav-links';
+
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import AppBar from '@mui/material/AppBar';
-
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-
-import { navLinks } from '../../constants/nav-links';
+import AppBar from '@mui/material/AppBar';
 
 function ResponsiveAppBar() {
 
-  const navStyles = { flexGrow: 1, display: { xs: 'none', md: 'flex' } }
+  const navStyles = { flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '20px' }
 
   return (
     <AppBar position="static">
@@ -17,13 +16,13 @@ function ResponsiveAppBar() {
         <Toolbar disableGutters>
           <Box sx={navStyles}>
             {navLinks.map((page) => (
-              <Button
+              <Link
+                style={{ color: '#fff', }}
                 key={page.id}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-                href={page.route}
+                to={page.route}
               >
                 {page.label}
-              </Button>
+              </Link>
             ))}
           </Box>
         </Toolbar>

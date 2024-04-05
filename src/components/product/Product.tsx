@@ -46,9 +46,9 @@ export default function Product({ data, link }: Props) {
         <Button sx={{ marginLeft: '20px' }} onClick={() => setOpen(true)} variant="contained">
           Удалить
         </Button >
-        <Button sx={{ marginLeft: '20px' }} href="/createProduct" variant="contained">
+        <Link style={{ marginLeft: '20px' }} to={`/product/edit/${link}`}>
           Редактировать
-        </Button >
+        </Link >
       </Card >
       {open && <Box sx={deleteModalStyle}>
         <Typography sx={{ marginBottom: '10px' }}>

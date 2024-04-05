@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ICreatedProduct } from "../interfaces/interfaces";
-import { addProduct, removeProduct } from "../store/products.slice";
+import { addEditedProduct, addProduct, removeProduct } from "../store/products.slice";
 
 interface FetchProductsParams {
   limit: number | null;
@@ -131,3 +131,41 @@ export const fetchProductFromLocStore = createAsyncThunk(
     }
   }
 );
+
+export const updateProduct = createAsyncThunk(
+  'product/updateProduct',
+  async (data: ICreatedProduct, { rejectWithValue, dispatch, getState }: { rejectWithValue: any, dispatch: any, getState: () => any }) => {
+
+    const products = getState().products.products.find((item: any) => item.id === data.id);
+
+    try {
+      const res = await fetch(`https://fakestoreapi.com/products/${data.id}`, {
+        method: "PATCH",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          {
+            title: data.title,
+            price: data.price,
+            description: data.description,
+            image: 'https://i.pravatar.cc',
+            category: 'edited'
+          })
+      });
+
+      if (!res.ok) throw new Error('Server error')
+
+      const product = await res.json();
+      console.log(product);
+
+
+      dispatch(addEditedProduct(product))
+
+      return product;
+    }
+    catch (error: any) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
