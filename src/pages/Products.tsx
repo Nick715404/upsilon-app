@@ -1,5 +1,5 @@
-import Tabs from "../components/tabs/Tabs"
 import LimiterBtns from "../components/limiter-btns/LimiterBtns"
+import Tabs from "../components/tabs/Tabs"
 
 import { Box, Container } from "@mui/material"
 

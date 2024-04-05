@@ -8,14 +8,17 @@ interface ProductsState {
   status: string;
   error: any;
   sortedProducts: ICreatedProduct[]
+  filteredProducts: IProduct[] | ICreatedProduct[]
 }
 
 const initialState: ProductsState = {
   products: [],
   createdProducts: [],
+  filteredProducts: [],
   sortedProducts: [],
   status: '',
   error: null,
+
 };
 
 export const productSlice = createSlice({
@@ -41,6 +44,31 @@ export const productSlice = createSlice({
       newArray = newArray.filter(item => item.category === 'published');
       state.sortedProducts = newArray;
     },
+    sortProducts(state, action: PayloadAction<string>) {
+      const sortBy = action.payload;
+      let sortedArray: IProduct[] | ICreatedProduct[] = state.products;
+
+      switch (sortBy) {
+        case 'electronics':
+          sortedArray = state.products.filter(product => product.category === 'electronics');
+          break;
+        case 'jewelery':
+          sortedArray = state.products.filter(product => product.category === 'jewelery');
+          break;
+        case "men's clothing":
+          sortedArray = state.products.filter(product => product.category === "men's clothing");
+          break;
+        case "women's clothing":
+          sortedArray = state.products.filter(product => product.category === "women's clothing");
+          break;
+        default:
+          sortedArray = state.products;
+          break;
+      }
+
+      state.filteredProducts = sortedArray;
+    },
+
     addEditedProduct(state, action: PayloadAction<ICreatedProduct>) {
       const existingProductIndex = state.products.findIndex(product => product.id === action.payload.id);
 
@@ -76,6 +104,6 @@ export const productSlice = createSlice({
   }
 });
 
-export const { removeProduct, addProduct, sortPublished, addEditedProduct } = productSlice.actions;
+export const { removeProduct, addProduct, sortPublished, addEditedProduct, sortProducts } = productSlice.actions;
 
 export default productSlice.reducer;

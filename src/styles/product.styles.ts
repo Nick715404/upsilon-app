@@ -14,6 +14,7 @@ export const deleteModalStyle: CSSProperties = {
   width: '400px',
   zIndex: '99999',
   textAlign: 'center',
-  padding: '15px'
+  padding: '15px',
+  boxShadow: "0px 0px 48px -3px rgba(0,0,0,0.75)"
 }
 

@@ -28,7 +28,13 @@ function ResponsiveAppBar() {
           ))}
         </Box>
         <Box>
-          <a className='about-link' target='_blank' href="https://t.me/unclenicklllson">About me</a>
+          <a
+            className='about-link'
+            target='_blank'
+            href="https://t.me/unclenicklllson"
+          >
+            Обо мне
+          </a>
         </Box>
       </Toolbar>
     </Container>

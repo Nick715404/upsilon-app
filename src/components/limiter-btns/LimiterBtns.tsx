@@ -5,7 +5,7 @@ import { changeLimit } from "../../store/limiter.slice";
 import { useDispatch } from "react-redux";
 import { Box, Button } from "@mui/material"
 import { btnStyles } from "./LimiterBtns.styles";
-import { btnBox } from "../../styles/Products.styles";
+import { btnBox } from "../../styles/products.styles";
 
 export default function LimiterBtns() {
 

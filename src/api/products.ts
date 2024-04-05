@@ -1,23 +1,16 @@
-import { ICreatedProduct } from "../interfaces/interfaces";
 import { addEditedProduct, addProduct, removeProduct } from "../store/products.slice";
+import {
+  IFetchProductsParams,
+  ICreatedProduct,
+  ICreateProduct,
+  IDeleteProduct
+} from "../interfaces/interfaces";
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-interface FetchProductsParams {
-  limit: number | null;
-}
-
-interface IDeleteProduct {
-  id: number
-}
-
-interface createProduct {
-  product: ICreatedProduct
-}
-
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async ({ limit }: FetchProductsParams, { rejectWithValue }) => {
+  async ({ limit }: IFetchProductsParams, { rejectWithValue }) => {
     try {
       const url = 'https://fakestoreapi.com/products';
       const reqUrl = `${url}?limit=${limit}`;
@@ -63,7 +56,7 @@ export const fetchSingleProducts = async (id: string | undefined) => {
 
 export const createProduct = createAsyncThunk(
   'products/createProduct',
-  async ({ product }: createProduct, { rejectWithValue, dispatch }) => {
+  async ({ product }: ICreateProduct, { rejectWithValue, dispatch }) => {
     try {
       console.log(product);
 

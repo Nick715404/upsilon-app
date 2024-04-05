@@ -1,17 +1,17 @@
 export const navLinks = [
   {
     id: 1,
-    label: 'Home',
+    label: 'Главная',
     route: '/'
   },
   {
     id: 2,
-    label: 'Create Product',
+    label: 'Создать продукт',
     route: '/createProduct'
   },
   {
     id: 3,
-    label: 'Products',
+    label: 'Каталог',
     route: '/products'
   },
 ]

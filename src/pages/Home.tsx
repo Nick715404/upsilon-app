@@ -10,7 +10,9 @@ export default function HomePage({ }: Props) {
         <Typography variant="h1" gutterBottom sx={{ margin: '130px auto 50px' }} >
           Тестовое задание
         </Typography>
-        <Box sx={boxStyles}></Box>
+        <Box sx={boxStyles}>
+          <Typography sx={{ color: '#fff', fontWeight: '300', fontSize: 'clamp(20px, 15vw, 260px)' }} >Let's Go!</Typography>
+        </Box>
       </Container>
     </Box>
   )

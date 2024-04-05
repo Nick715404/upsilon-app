@@ -26,5 +26,16 @@ export interface ICreatedProduct {
   created_at: string
   category?: string
   image: string
+}
 
+export interface IFetchProductsParams {
+  limit: number | null;
+}
+
+export interface IDeleteProduct {
+  id: number
+}
+
+export interface ICreateProduct {
+  product: ICreatedProduct
 }
