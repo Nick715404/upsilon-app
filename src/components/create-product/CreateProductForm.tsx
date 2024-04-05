@@ -1,5 +1,12 @@
 import { useForm } from 'react-hook-form';
-import { TextField, Button, FormControlLabel, Switch, Box, Typography } from '@mui/material';
+import {
+  TextField,
+  Button,
+  FormControlLabel,
+  Switch,
+  Box,
+  Typography
+} from '@mui/material';
 
 export default function CreateProductForm() {
 
@@ -16,6 +23,7 @@ export default function CreateProductForm() {
   });
 
   const onSubmit = (data: any) => {
+    data.created_at = new Date().toISOString();
     console.log(JSON.stringify(data));
     reset();
   };

@@ -1,6 +1,7 @@
 import { CSSProperties } from "react";
 
 export const productCardStyles: CSSProperties = {
-  borderRadius: '30px',
-  marginBottom: '40px'
+  borderRadius: '20px',
+  marginBottom: '40px',
+  height: '100%'
 }

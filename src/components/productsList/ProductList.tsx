@@ -14,13 +14,24 @@ export default function ProductList({ }: Props) {
     console.log(status);
   }, [status])
 
+  const boxStyles = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '30px',
+    marginTop: '30px',
+    marginBottom: '80px'
+  }
+
   return (
-    <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '30px', marginTop: '80px' }}>
-      {status === 'loading' && <h1>Loading...</h1>}
-      {error && <h1>An error occured {error}</h1>}
-      {products.map((item: IProduct) => (
-        <Product key={item.id} data={item} />
-      ))}
-    </Box>
+    <>
+      <Box sx={boxStyles}>
+        {status === 'loading' && <h1>Loading...</h1>}
+        {error && <h1>An error occured {error}</h1>}
+        {products.map((item: IProduct) => (
+          <Product key={item.id} data={item} />
+        ))}
+
+      </Box>
+    </>
   )
 }
