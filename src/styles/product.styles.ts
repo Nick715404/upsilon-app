@@ -1,11 +1,5 @@
 import { CSSProperties } from "react";
 
-export const productCardStyles: CSSProperties = {
-  borderRadius: '20px',
-  marginBottom: '40px',
-  height: '100%'
-}
-
 export const deleteModalStyle: CSSProperties = {
   position: 'fixed',
   top: '50%',
@@ -22,3 +16,4 @@ export const deleteModalStyle: CSSProperties = {
   textAlign: 'center',
   padding: '15px'
 }
+

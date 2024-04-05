@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { IProduct } from "../../interfaces/interfaces";
 import Product from "../product/Product";
-import { Box } from "@mui/material";
+import { Box, CircularProgress, LinearProgress } from "@mui/material";
 import { useEffect } from "react";
 
 type Props = {}
@@ -16,11 +16,12 @@ export default function ProductList({ }: Props) {
     gap: '30px',
     marginTop: '30px',
     marginBottom: '80px'
+
   }
 
   return (
     <Box sx={boxStyles}>
-      {status === 'loading' && <h1>Loading...</h1>}
+      {status === 'loading' && <LinearProgress sx={{ position: 'absolute', top: '65px', left: '0', width: '100%', height: '2px' }} />}
       {error && <h1>An error occured {error}</h1>}
       {products.map((item: IProduct, index: number) => (
         <Product link={item.id} key={index} data={item} />

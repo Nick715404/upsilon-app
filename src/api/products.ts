@@ -1,9 +1,18 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ICreatedProduct } from "../interfaces/interfaces";
 import { addEditedProduct, addProduct, removeProduct } from "../store/products.slice";
 
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
 interface FetchProductsParams {
   limit: number | null;
+}
+
+interface IDeleteProduct {
+  id: number
+}
+
+interface createProduct {
+  product: ICreatedProduct
 }
 
 export const fetchProducts = createAsyncThunk(
@@ -52,10 +61,6 @@ export const fetchSingleProducts = async (id: string | undefined) => {
   }
 };
 
-interface createProduct {
-  product: ICreatedProduct
-}
-
 export const createProduct = createAsyncThunk(
   'products/createProduct',
   async ({ product }: createProduct, { rejectWithValue, dispatch }) => {
@@ -82,7 +87,7 @@ export const createProduct = createAsyncThunk(
 
       const data = await res.json();
       console.log(data);
-      dispatch(addProduct({ ...data }))
+      dispatch(addProduct(data))
       return data;
     }
     catch (error: any) {
@@ -90,10 +95,6 @@ export const createProduct = createAsyncThunk(
     }
   }
 )
-
-interface IDeleteProduct {
-  id: number
-}
 
 export const deleteProduct = createAsyncThunk(
   'products/deleteProduct',
@@ -104,33 +105,13 @@ export const deleteProduct = createAsyncThunk(
       });
 
       if (!res.ok) throw new Error('Cant delete product')
-
       dispatch(removeProduct({ id }));
-      return;
     }
     catch (error: any) {
       return rejectWithValue(error.message);
     }
   }
 )
-
-export const fetchProductFromLocStore = createAsyncThunk(
-  'products/fetchFromLocStore',
-  async (_, { rejectWithValue, dispatch }) => {
-    try {
-      const storedProducts = localStorage.getItem('products');
-      if (!storedProducts) {
-        throw new Error('No products found in local storage');
-      }
-      const products = JSON.parse(storedProducts);
-
-      dispatch(addProduct(products))
-
-    } catch (error: any) {
-      return rejectWithValue(error.message)
-    }
-  }
-);
 
 export const updateProduct = createAsyncThunk(
   'product/updateProduct',

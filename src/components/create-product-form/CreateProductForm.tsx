@@ -1,6 +1,5 @@
 import { createProduct } from '../../api/products';
 import { ICreatedProduct } from '../../interfaces/interfaces';
-import { saveToLocalStorage } from '../../utils/saveToLocStore';
 
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -38,7 +37,6 @@ export default function CreateProductForm() {
     data.price = parseInt(data.price);
     const product: ICreatedProduct = data;
     dispatch(createProduct({ product }));
-    saveToLocalStorage(data);
     reset();
   };
 

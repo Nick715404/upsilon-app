@@ -3,23 +3,25 @@ import { IButtons } from "../../interfaces/interfaces"
 import { changeLimit } from "../../store/limiter.slice";
 
 import { useDispatch } from "react-redux";
-import { Button } from "@mui/material"
+import { Box, Button } from "@mui/material"
+import { btnStyles } from "./LimiterBtns.styles";
+import { btnBox } from "../../styles/Products.styles";
 
 export default function LimiterBtns() {
 
   const dispatch = useDispatch();
 
   return (
-    <>
+    <Box sx={btnBox}>
       {buttons.map((btn: IButtons) => (
         <Button
           key={btn.id}
           onClick={() => dispatch(changeLimit(btn.value))}
-          variant="contained"
+          sx={btnStyles}
         >
           {btn.title}
         </Button>
       ))}
-    </>
+    </Box>
   )
 }

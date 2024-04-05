@@ -25,11 +25,12 @@ export const productSlice = createSlice({
     removeProduct(state, action: PayloadAction<{ id: number }>) {
       state.products = state.products.filter((product) => product.id !== action.payload.id);
       state.createdProducts = state.createdProducts.filter((product) => product.id !== action.payload.id);
+      state.sortedProducts = state.sortedProducts.filter((product) => product.id !== action.payload.id);
     },
-    addProduct(state, action: PayloadAction<ICreatedProduct[]>) {
-      state.products.push(...action.payload);
-      state.createdProducts.push(...action.payload);
-      state.sortedProducts.push(...action.payload);
+    addProduct(state, action: PayloadAction<ICreatedProduct>) {
+      state.products.push(action.payload);
+      state.createdProducts.push(action.payload);
+      state.sortedProducts.push(action.payload);
     },
     sortPublished(state, action) {
       if (action.payload === false) {
@@ -37,7 +38,7 @@ export const productSlice = createSlice({
         return;
       }
       let newArray = [...state.createdProducts];
-      newArray = newArray.filter(item => item.published === action.payload);
+      newArray = newArray.filter(item => item.category === 'published');
       state.sortedProducts = newArray;
     },
     addEditedProduct(state, action: PayloadAction<ICreatedProduct>) {
@@ -71,7 +72,7 @@ export const productSlice = createSlice({
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'rejected';
         state.error = action.payload;
-      });
+      })
   }
 });
 

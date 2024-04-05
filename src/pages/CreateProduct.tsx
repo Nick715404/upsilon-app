@@ -1,5 +1,5 @@
 import { Box, Container } from "@mui/material"
-import CreateProductForm from "../components/create-product/CreateProductForm"
+import CreateProductForm from "../components/create-product-form/CreateProductForm"
 
 type Props = {}
 

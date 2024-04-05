@@ -4,30 +4,34 @@ import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
-import AppBar from '@mui/material/AppBar';
+import { Typography } from '@mui/material';
+import { logoStyles, navStyles, toolbarStyles } from './Header.styles';
 
 function ResponsiveAppBar() {
-
-  const navStyles = { flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '20px' }
-
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box sx={navStyles}>
-            {navLinks.map((page) => (
-              <Link
-                style={{ color: '#fff', }}
-                key={page.id}
-                to={page.route}
-              >
-                {page.label}
-              </Link>
-            ))}
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+    <Container maxWidth="xl">
+      <Toolbar sx={toolbarStyles} disableGutters>
+        <Box>
+          <Typography sx={logoStyles} >
+            Upsilon
+          </Typography>
+        </Box>
+        <Box sx={navStyles}>
+          {navLinks.map((page) => (
+            <Link
+              className='header-link'
+              key={page.id}
+              to={page.route}
+            >
+              {page.label}
+            </Link>
+          ))}
+        </Box>
+        <Box>
+          <a className='about-link' target='_blank' href="https://t.me/unclenicklllson">About me</a>
+        </Box>
+      </Toolbar>
+    </Container>
   );
 }
 export default ResponsiveAppBar;

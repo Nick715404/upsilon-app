@@ -1,11 +1,15 @@
-import { Box, Button, Card, CardContent, CardMedia, Typography } from "@mui/material"
 import { IProduct } from "../../interfaces/interfaces"
-import { deleteModalStyle, productCardStyles } from "../../styles/product.styles"
-import { Link } from 'react-router-dom';
+import { deleteModalStyle } from "../../styles/product.styles"
+import styles from './Product.module.scss';
+
+import { productCardStyles } from './Product.styles';
+
 import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../api/products";
-import { ThunkDispatch } from "@reduxjs/toolkit";
+import { Link } from 'react-router-dom';
 import { useState } from "react";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { Box, Button, Card, CardContent, CardMedia, Typography } from "@mui/material"
 
 type Props = {
   data: IProduct
@@ -15,7 +19,6 @@ type Props = {
 export default function Product({ data, link }: Props) {
 
   const [open, setOpen] = useState<boolean>(false);
-
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
   const handleDelete = () => {
@@ -26,29 +29,29 @@ export default function Product({ data, link }: Props) {
 
   return (
     <>
-      <Card sx={productCardStyles}>
-        <Link to={`/product/${link}`} style={{ textDecoration: 'none' }}>
+      <Card className={styles.productCard}>
+        <Link to={`/product/${link}`} className={styles.productLink}>
           <CardMedia
             component="img"
             height='340'
             image={data.image}
             alt="green iguana"
           />
-          <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-            <Typography gutterBottom variant="h5" component="div">
+          <CardContent className={styles.cardContent}>
+            <Typography className={styles.title}>
               {data.title}
             </Typography>
-            <Typography sx={{ fontSize: '22px', fontWeight: '600', color: '#000' }} variant="body2" color="text.secondary">
-              {data.price}$
+            <Typography className={styles.price}>
+              {`${data.price}$`}
             </Typography>
           </CardContent>
         </Link>
-        <Button sx={{ marginLeft: '20px' }} onClick={() => setOpen(true)} variant="contained">
-          Удалить
-        </Button >
-        <Link style={{ marginLeft: '20px' }} to={`/product/edit/${link}`}>
+        <Link className={styles.edit} to={`/product/edit/${link}`}>
           Редактировать
         </Link >
+        <Button className={styles.delete} onClick={() => setOpen(true)} variant="contained">
+          Удалить
+        </Button >
       </Card >
       {open && <Box sx={deleteModalStyle}>
         <Typography sx={{ marginBottom: '10px' }}>

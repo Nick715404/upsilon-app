@@ -1,10 +1,8 @@
 import Product from "../product/Product";
-
 import { ICreatedProduct } from "../../interfaces/interfaces";
 
 import { useSelector } from "react-redux";
 import { Box } from "@mui/material";
-
 
 export default function CreatedProductsList() {
 
@@ -17,8 +15,6 @@ export default function CreatedProductsList() {
     marginTop: '30px',
     marginBottom: '80px'
   }
-
-  console.log(sortedProducts);
 
   return (
     <Box sx={boxStyles}>
